@@ -78,7 +78,6 @@ namespace EmployeePayRollADVNET
             }
             catch (Exception ex)
             {
-
                 throw new Exception(ex.Message);
             }
             finally
@@ -87,7 +86,7 @@ namespace EmployeePayRollADVNET
             }
         }
 
-        //To Add Employee details    
+        //Method To Add Employee details    
         public void AddEmployee(EmployeeModel obj)
         {
             try
@@ -124,6 +123,44 @@ namespace EmployeePayRollADVNET
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+        //Method To Update Employee details    
+        public EmployeeModel UpdateEmployee(EmployeeModel obj)
+        {
+            try
+            {
+                connection = new SqlConnection(connectionstring);
+                SqlCommand command = new SqlCommand("spUpdateEmployee", connection)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                command.Parameters.AddWithValue("@Id", obj.Id);
+                command.Parameters.AddWithValue("@Name", obj.Name);
+                command.Parameters.AddWithValue("@Salary", obj.Salary);
+                command.Parameters.AddWithValue("@Basic_Pay", obj.Salary);
+                connection.Open();
+                var result = command.ExecuteNonQuery();
+                if (result != 0)
+                {
+                    Console.WriteLine("Employee details updated successfully");
+                    return obj;
+                }
+                else
+                {
+                    Console.WriteLine("Failed to update employee details");
+                    return default;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return default;
             }
             finally
             {
