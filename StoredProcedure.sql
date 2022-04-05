@@ -50,3 +50,4 @@ ERROR_PROCEDURE() AS ErrorProcedure,
 ERROR_LINE() AS ErrorLine,
 ERROR_MESSAGE() AS ErrorMessage;
 END CATCH
+select *From Employee_Payroll
