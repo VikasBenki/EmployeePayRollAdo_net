@@ -30,7 +30,7 @@ END CATCH
 exec spAddEmployee;
 
 --Update employee details in the database--
-create procedure spUpdateEmployee
+Create procedure spUpdateEmployee
 (
 @Id int,
 @Name varchar(100),
@@ -74,3 +74,14 @@ ERROR_MESSAGE() AS ErrorMessage;
 END CATCH
 select * from employee_payroll
 
+<<<<<<< HEAD
+=======
+--Find Sum, Average, min, max, count of salary by gender--
+Create procedure spDBFunctions
+as
+select sum(Salary) as sumsalary,Gender from employee_payroll group by Gender;
+select avg(Salary) as avgsalary,Gender from employee_payroll group by Gender; 
+select max(Salary) as maxsalary,Gender from employee_payroll group by Gender; 
+select min(Salary) as minsalary,Gender from employee_payroll group by Gender; 
+select count(Name) as EmployeeCount,Gender from employee_payroll group by Gender; 
+>>>>>>> UC4_5_RetriveDataByDate
